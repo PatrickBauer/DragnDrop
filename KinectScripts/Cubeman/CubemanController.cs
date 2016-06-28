@@ -55,12 +55,10 @@ public class CubemanController : MonoBehaviour
 	private LineRenderer lineFLeft;
 	private LineRenderer lineFRight;
 
-
-    private Int64 initialPosUserID = 0;
     private Vector3 initialPosition;
 	private Quaternion initialRotation;
-	
-    private Vector3 offsetPosition = Vector3.zero;    
+
+    private Vector3 offsetPosition = new Vector3(0.0f, -1000.0f, 0.0f);
 
     void Start () 
 	{
@@ -92,14 +90,18 @@ public class CubemanController : MonoBehaviour
             Hand_Tip_Right,
             Thumb_Right
 		};
-		
-		lines = new LineRenderer[bones.Length];
+
+        initialRotation = transform.rotation;
+
+        lines = new LineRenderer[bones.Length];
 	}
 	
     public void ResetAt(Vector3 position)
     {
         KinectManager manager = KinectManager.Instance;
         Vector3 posPointMan = manager.GetUserPosition(manager.GetPrimaryUserID());
+
+        position.z = -position.z;
 
         offsetPosition = position - posPointMan;
         offsetPosition.z = -offsetPosition.z;
@@ -123,7 +125,8 @@ public class CubemanController : MonoBehaviour
         Relpos.z = -Relpos.z;
 
         transform.position = (Relpos * moveRate) + offsetPosition;
-        
+        //Debug.Log("Von Kinect: " + Relpos + " - Offset: " + offsetPosition + " =  Endposition: " + transform.position + " = Indikator: " + indicator.transform.position);
+       
         // update the local positions of the bones
         for (int i = 0; i < bones.Length; i++) 
 		{

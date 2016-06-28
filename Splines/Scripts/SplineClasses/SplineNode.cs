@@ -78,7 +78,7 @@ public class SplineNode : MonoBehaviour {
 				spline = transform.parent.GetComponent<Spline>();
 				
 		foreach(Transform child in transform) {
-			child.gameObject.active = false;
+			child.gameObject.SetActive(false);
 			switch(child.name) {
 			case "NextArrow": if(!nextArrow) nextArrow = child.gameObject;	break;
 			case "PrevArrow": if(!prevArrow) prevArrow = child.gameObject; break;
@@ -127,21 +127,21 @@ public class SplineNode : MonoBehaviour {
 		}
 		if(nextArrow) {
 			if(next && !hideHandles) {
-				nextArrow.active = true;
+				nextArrow.SetActive(true);
 				nextArrow.transform.LookAt(next.transform, Vector3.forward);
-			} else nextArrow.active = false;
+			} else nextArrow.SetActive(false);
 		}
 		if(prevArrow) {
 			if(previous && !hideHandles) {
-				prevArrow.active = true;
+				prevArrow.SetActive(true);
 				prevArrow.transform.LookAt(previous.transform, Vector3.forward);
-			} else prevArrow.active = false;
+			} else prevArrow.SetActive(false);
 		}
 	}
 	public void RefreshModel() {
 		if(handles) {
-			if(hideHandles) handles.SetActiveRecursively(false);
-			else			handles.SetActiveRecursively(true);
+			if(hideHandles) handles.SetActive(false);
+			else			handles.SetActive(true);
 		}
 		if(GetComponent<MeshFilter>() && GetComponent<Renderer>()) {
 			MeshFilter mesh = GetComponent<MeshFilter>();
@@ -222,8 +222,8 @@ public class SplineNode : MonoBehaviour {
 	public GameObject AddNext() {
 		//New Node
 		GameObject dup = (GameObject)GameObject.Instantiate(gameObject);
-		dup.SetActiveRecursively(false);
-		dup.active = true;
+		dup.SetActive(false);
+		dup.SetActive(true);
 		if(transform.parent)
 			dup.transform.parent = transform.parent;
 		dup.transform.position = transform.position + Vector3.right * addOffset;
@@ -249,8 +249,8 @@ public class SplineNode : MonoBehaviour {
 	public GameObject AddPrev() {
 		GameObject dup = (GameObject)GameObject.Instantiate(gameObject);			//Start by copying me
 		//For some reason, all children are active on duplication.  We just need to deactivate all of the children, and reactivate the parent
-		dup.SetActiveRecursively(false);
-		dup.active = true;
+		dup.SetActive(false);
+		dup.SetActive(true);
 		if(transform.parent)
 			dup.transform.parent = transform.parent;						//If I have a parent, add it to the new node
 		dup.transform.position = transform.position + Vector3.left * addOffset;
