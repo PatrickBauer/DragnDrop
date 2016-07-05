@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 public class SteamVRPinchActivator : DragDropActivator
 {
-    private Valve.VR.EVRButtonId gripButton = Valve.VR.EVRButtonId.k_EButton_Grip;
+    //private Valve.VR.EVRButtonId gripButton = Valve.VR.EVRButtonId.k_EButton_Grip;
     private Valve.VR.EVRButtonId triggerButton = Valve.VR.EVRButtonId.k_EButton_SteamVR_Trigger;
 
     private SteamVR_Controller.Device controller { get {
