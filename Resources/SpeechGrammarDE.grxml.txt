@@ -1,0 +1,24 @@
+﻿<grammar version="1.0" xml:lang="de-DE" root="rootRule" tag-format="semantics/1.0-literals" xmlns="http://www.w3.org/2001/06/grammar">
+  <rule id="rootRule">
+    <one-of>
+      <item>
+        <tag>START</tag>
+        <one-of>
+          <item> start </item>
+          <item> los </item>
+          <item> beginn </item>
+          <item> drag </item>
+        </one-of>
+      </item>
+      <item>
+        <tag>ENDE</tag>
+        <one-of>
+          <item> ende </item>
+          <item> stop </item>
+          <item> beenden </item>
+          <item> drop </item>
+        </one-of>
+      </item>
+    </one-of>
+  </rule>
+</grammar>
