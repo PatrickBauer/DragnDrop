@@ -14,11 +14,6 @@ public class DragInitiator : MonoBehaviour {
 
     public bool hasTouchActivator { get; set; }
 
-	void Start()
-    {
-        ResetActivator();
-    }
-
     public void ResetActivator()
     {
         if (externalActivator)
@@ -40,6 +35,11 @@ public class DragInitiator : MonoBehaviour {
 	// Update is called once per frame
 	void FixedUpdate() {
         if (!dragDropActivator) return;
+
+        if (dragDropActivator.isActive)
+        {
+            float minDistance = float.MaxValue;
+        }
 
         if (dragDropActivator.isActive && dragDropActivator.changedSinceLastFrame)
         {

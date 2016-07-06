@@ -3,13 +3,9 @@ using System.Collections;
 
 public class KinectDeviceManager : DeviceManager {
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    override public void AddPinch()
+    {
+        //left.AddComponent<KinectPinchActivator>();
+        //right.AddComponent<KinectPinchActivator>();
+    }
 }

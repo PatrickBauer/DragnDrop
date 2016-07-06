@@ -25,19 +25,14 @@ public class TestManager : MonoBehaviour {
         Speech
     }
 
-    protected DeviceTypes device = DeviceTypes.SteamVR;
-    protected ActivatorTypes activator = ActivatorTypes.Pinch;
+    public DeviceTypes device = DeviceTypes.SteamVR;
+    public ActivatorTypes activator = ActivatorTypes.Pinch;
 
     // Use this for initialization
     void Start () {
-        Reset();
+       Reset();
 	}
 	
-	// Update is called once per frame
-	void Update () {
-	
-	}
-
     void Reset()
     {
         DeactivateAllDevices();

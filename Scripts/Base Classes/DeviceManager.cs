@@ -9,26 +9,42 @@ public class DeviceManager : MonoBehaviour {
 
 
     public virtual void Enable() {
-        toEnableDisable.SetActive(true);
+        if(toEnableDisable)
+            toEnableDisable.SetActive(true);
+
+        if (!left.GetComponent<DragInitiator>())
+            left.AddComponent<DragInitiator>();
+
+        if(!right.GetComponent<DragInitiator>())
+            right.AddComponent<DragInitiator>();
     }
 
     public virtual void Disable() {
-        toEnableDisable.SetActive(false);
+        if (toEnableDisable)
+            toEnableDisable.SetActive(false);
 
-        left.GetComponent<DragInitiator>().externalActivator = null;
-        right.GetComponent<DragInitiator>().externalActivator = null;
+        if (left.GetComponent<DragInitiator>())
+            DestroyImmediate(left.GetComponent<DragInitiator>());
 
-        if(left.GetComponent<DragDropActivator>())
-            Destroy(left.GetComponent<DragDropActivator>());
+        if (right.GetComponent<DragInitiator>())
+            DestroyImmediate(right.GetComponent<DragInitiator>());
+
+        if (left.GetComponent<DragDropActivator>())
+            DestroyImmediate(left.GetComponent<DragDropActivator>());
 
         if (right.GetComponent<DragDropActivator>())
-            Destroy(right.GetComponent<DragDropActivator>());
+            DestroyImmediate(right.GetComponent<DragDropActivator>());
     }
 
     public virtual void AddSpeech()
     {
-        left.GetComponent<DragInitiator>().externalActivator = GameObject.Find("Scripts/Speech").GetComponent<DragDropActivator>();
-        right.GetComponent<DragInitiator>().externalActivator = GameObject.Find("Scripts/Speech").GetComponent<DragDropActivator>();
+        DragDropActivator speech = GameObject.Find("Scripts/Speech").GetComponent<DragDropActivator>();
+
+        if (left.GetComponent<DragInitiator>() && speech)
+            left.GetComponent<DragInitiator>().externalActivator = speech;
+
+        if(right.GetComponent<DragInitiator>() && speech)
+            right.GetComponent<DragInitiator>().externalActivator = speech;
     }
 
     public virtual void AddTouch() {

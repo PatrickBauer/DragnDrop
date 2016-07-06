@@ -22,7 +22,7 @@ public class SteamVRPinchActivator : DragDropActivator
         trackedObj = GetComponent<SteamVR_TrackedObject>();
     }
 
-    void Update()
+    void FixedUpdate()
     {
         if (controller == null) return;        
 

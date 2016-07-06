@@ -13,15 +13,17 @@ public class DragObject : MonoBehaviour
     private Vector3 initialPosition;
 
     // Use this for initialization
-    protected void Start()
+    protected void OnEnable()
     {
-        interactionPoint = new GameObject().transform;
-        initialPosition = transform.localPosition;
+        interactionPoint = new GameObject("Interaction Point").transform;
+        initialPosition = transform.position;
+
+        original = transform.parent;
     }
 
     public void Reset()
     {
-        transform.localPosition = new Vector3(-0.23f, 1.9f, 0.383f);
+        transform.position = initialPosition;
     }
 
     protected void FixedUpdate()
@@ -64,7 +66,6 @@ public class DragObject : MonoBehaviour
             lastZValue = interactionPoint.position.z;
         }
 
-        original = transform.parent;
         transform.SetParent(interactionPoint, true);
     }
 
