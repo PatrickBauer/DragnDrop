@@ -28,6 +28,8 @@ public class TestManager : MonoBehaviour {
     public DeviceTypes device = DeviceTypes.SteamVR;
     public ActivatorTypes activator = ActivatorTypes.Pinch;
 
+    public bool showModels = true;
+
     // Use this for initialization
     void Start () {
        Reset();
@@ -74,6 +76,7 @@ public class TestManager : MonoBehaviour {
         }
 
         activeDevice.ResetActivator();
+        activeDevice.ShowModels(showModels);
     }
 
     void DeactivateAllDevices()
@@ -97,10 +100,13 @@ public class TestManager : MonoBehaviour {
     {
         GUILayout.Label("Accuracy: " + accuracyTeser.accuracy.ToString("F1") + "%");
 
-        GUILayout.Label("Device");
+        GUILayout.Label("Models:");
+        DoModelGUI();
+
+        GUILayout.Label("Devices:");
         DoDeviceGUI();
 
-        GUILayout.Label("Activator");
+        GUILayout.Label("Activators:");
         DoActivatorGUI();
 
         if (GUILayout.Button("Reset"))
@@ -112,6 +118,27 @@ public class TestManager : MonoBehaviour {
         {
             StartKinectInit();
         }
+    }
+
+    private void DoModelGUI()
+    {
+        GUILayout.BeginHorizontal();
+
+        GUI.color = showModels ? Color.green : Color.white;
+        if (GUILayout.Button("Aktiv"))
+        {
+            showModels = true;
+        }
+
+        GUI.color = !showModels ? Color.green : Color.white;
+        if (GUILayout.Button("Inaktiv"))
+        {
+            showModels = false;
+        }
+
+        GUI.color = Color.white;
+
+        GUILayout.EndHorizontal();
     }
 
     private void DoDeviceGUI()

@@ -54,6 +54,24 @@ public class DeviceManager : MonoBehaviour {
 
     public virtual void AddPinch() { }
 
+    public virtual void ShowModels(bool showModels)
+    {
+        setMeshState(toEnableDisable.transform, showModels);
+    }
+
+    public void setMeshState(Transform parent, bool state)
+    {
+        foreach (Transform child in parent)
+        {
+            setMeshState(child, state);
+
+            if (child.GetComponent<Renderer>() && !child.GetComponent<DragInitiator>())
+            {
+                child.GetComponent<Renderer>().enabled = state;
+            }
+        }
+    }
+
     public virtual void ResetActivator() {
         left.GetComponent<DragInitiator>().ResetActivator();
         right.GetComponent<DragInitiator>().ResetActivator();

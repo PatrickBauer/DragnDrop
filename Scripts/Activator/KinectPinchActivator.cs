@@ -8,8 +8,8 @@ public class KinectPinchActivator : DragDropActivator
     public GameObject A;
     public GameObject B;
 
-    public float startDistance = 0.07f;
-    public float stopDistance = 0.08f;
+    public float startDistance = 0.03f;
+    public float stopDistance = 0.04f;
 
     // Use this for initialization
     void Start () {

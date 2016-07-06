@@ -15,27 +15,17 @@ public class TouchActivator : DragDropActivator {
         }
     }
 
+    //Called from initiator
     public void Enter()
     {
         isActive = true;
         triggerSinceLastFrame = true;
     }
-
+    
+    //Called from initiator
     public void Exit()
     {
         isActive = false;
         triggerSinceLastFrame = true;
     }
-
-    //private void OnTriggerEnter(Collider collider)
-    //{
-    //    isActive = true;
-    //    triggerSinceLastFrame = true;
-    //}
-
-    //private void OnTriggerExit(Collider collider)
-    //{
-    //    isActive = false;
-    //    triggerSinceLastFrame = true;
-    //}
 }

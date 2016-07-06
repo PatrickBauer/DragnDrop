@@ -37,9 +37,9 @@ public class DragObject : MonoBehaviour
             if (dragInitiator.hasTouchActivator)
             {
 
+                //max distance to control object if touch is used
                 if (Vector3.Distance(transform.position, control.transform.position) >= maxDistanceFromLine)
                 {
-                    Debug.Log("Raus!");
                     transform.position = lastPosition;
                 }
 

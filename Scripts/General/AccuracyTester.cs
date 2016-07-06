@@ -10,9 +10,7 @@ public class AccuracyTester : MonoBehaviour {
     public float accuracy = 0.0f;
     protected float factor = 100000;
     protected Vector3 difference;
-
-    protected Color colorOriginal;
-
+    
     void Update () {
         difference = transform.position - target.transform.position;
 
@@ -22,7 +20,7 @@ public class AccuracyTester : MonoBehaviour {
 
         accuracy = 0.0f;
 
-        if (GetComponent<BoxCollider>().bounds.Intersects(target.GetComponent<BoxCollider>().bounds))
+        if (GetComponent<SphereCollider>().bounds.Intersects(target.GetComponent<SphereCollider>().bounds))
         {
             volume_max = 0.1f * 0.1f * 0.1f;
             volume = x * y * z;
@@ -31,10 +29,9 @@ public class AccuracyTester : MonoBehaviour {
 
             if (accuracy >= minAccuracy)
             {
-                colorOriginal = GetComponent<Renderer>().material.GetColor("_Color");
                 GetComponent<Renderer>().material.SetColor("_Color", Color.green);
             } else {
-                GetComponent<Renderer>().material.SetColor("_Color", colorOriginal);
+                GetComponent<Renderer>().material.SetColor("_Color", Color.blue);
             }
         }
     }
