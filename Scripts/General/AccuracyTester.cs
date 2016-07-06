@@ -11,6 +11,8 @@ public class AccuracyTester : MonoBehaviour {
     protected float factor = 100000;
     protected Vector3 difference;
 
+    protected Color colorOriginal;
+
     void Update () {
         difference = transform.position - target.transform.position;
 
@@ -29,11 +31,10 @@ public class AccuracyTester : MonoBehaviour {
 
             if (accuracy >= minAccuracy)
             {
+                colorOriginal = GetComponent<Renderer>().material.GetColor("_Color");
                 GetComponent<Renderer>().material.SetColor("_Color", Color.green);
-                //target.GetComponent<Renderer>().material.SetColor("_Color", Color.blue);
             } else {
-                GetComponent<Renderer>().material.SetColor("_Color", Color.white);
-                //target.GetComponent<Renderer>().material.SetColor("_Color", Color.blue);
+                GetComponent<Renderer>().material.SetColor("_Color", colorOriginal);
             }
         }
     }

@@ -36,11 +36,6 @@ public class DragInitiator : MonoBehaviour {
 	void FixedUpdate() {
         if (!dragDropActivator) return;
 
-        if (dragDropActivator.isActive)
-        {
-            float minDistance = float.MaxValue;
-        }
-
         if (dragDropActivator.isActive && dragDropActivator.changedSinceLastFrame)
         {
             // Find the closest item to the hand in case there are multiple and interact with it
@@ -64,7 +59,7 @@ public class DragInitiator : MonoBehaviour {
             if (interactingItem)
                 interactingItem.OnDragStart(this);
 
-        } else if(interactingItem != null && dragDropActivator.changedSinceLastFrame) {
+        } else if(interactingItem != null && !dragDropActivator.isActive && dragDropActivator.changedSinceLastFrame) {
             interactingItem.OnDragStop(this);
         }
     }
@@ -78,6 +73,11 @@ public class DragInitiator : MonoBehaviour {
         {
             objectsHoveringOver.Add(collidedItem);
             collidedItem.OnHoverEnter();
+
+            if(dragDropActivator is TouchActivator)
+            {
+                ((TouchActivator) dragDropActivator).Enter();
+            }
         }
     }
 
@@ -89,6 +89,11 @@ public class DragInitiator : MonoBehaviour {
         {
             objectsHoveringOver.Remove(collidedItem);
             collidedItem.OnHoverLeave();
+
+            if (dragDropActivator is TouchActivator)
+            {
+                ((TouchActivator)dragDropActivator).Exit();
+            }
         }
     }
 }

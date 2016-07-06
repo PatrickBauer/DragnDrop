@@ -6,11 +6,13 @@ public class DragObject : MonoBehaviour
     private DragInitiator dragInitiator;
     private Transform interactionPoint;
     private Transform original;
-
-    private float lastZValue;
+    public GameObject control;
 
     public bool allowRotation = false;
     private Vector3 initialPosition;
+    private Vector3 lastPosition;
+
+    public float maxDistanceFromLine = 0.05f;
 
     // Use this for initialization
     protected void OnEnable()
@@ -32,15 +34,19 @@ public class DragObject : MonoBehaviour
         {
             interactionPoint.transform.position = dragInitiator.transform.position;
 
-            if (dragInitiator.hasTouchActivator && dragInitiator.transform.position.z < lastZValue)
+            if (dragInitiator.hasTouchActivator)
             {
-                Vector3 temp = interactionPoint.transform.position;
-                temp.z = lastZValue;
 
-                interactionPoint.transform.position = temp;
+                if (Vector3.Distance(transform.position, control.transform.position) >= maxDistanceFromLine)
+                {
+                    Debug.Log("Raus!");
+                    transform.position = lastPosition;
+                }
+
+                lastPosition = transform.position;
             }
 
-            lastZValue = interactionPoint.transform.position.z;
+
 
             if (allowRotation)
             {
@@ -56,14 +62,14 @@ public class DragObject : MonoBehaviour
         dragInitiator = initiator;
         interactionPoint.transform.position = initiator.transform.position;
 
+        if (dragInitiator.hasTouchActivator)
+        {
+            lastPosition = transform.position;
+        }
+
         if (allowRotation)
         {
             interactionPoint.rotation = initiator.transform.rotation;
-        }
-
-        if (initiator.hasTouchActivator)
-        {
-            lastZValue = interactionPoint.position.z;
         }
 
         transform.SetParent(interactionPoint, true);
