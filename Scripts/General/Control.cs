@@ -15,7 +15,7 @@ public class Control : MonoBehaviour {
         var vVector1 = vPoint - vA;
         var vVector2 = (vB - vA).normalized;
 
-        var d = Vector3.Distance(vA, vB);
+        //var d = Vector3.Distance(vA, vB);
         var t = Vector3.Dot(vVector2, vVector1);
 
         //if (t <= 0)

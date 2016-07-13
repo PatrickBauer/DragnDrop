@@ -39,6 +39,7 @@ public class DeviceManager : MonoBehaviour {
     public GameObject dragStart;
     public GameObject control;
     public RenderLine line;
+    public GameObject DragDropObjects;
 
     private int positionCounter = 0;
 
@@ -68,8 +69,6 @@ public class DeviceManager : MonoBehaviour {
         //6
         positionsStart.Add(new Vector3(0.3f, 0.1f, 02f));
         positionsEnd.Add(new Vector3(-0.3f, -0.1f, 0.0f));
-
-        Reset();
     }
 
     void SetNewPositions()
@@ -85,9 +84,19 @@ public class DeviceManager : MonoBehaviour {
             positionCounter = 0;
     }
 
+    public void Reset(DeviceTypes deviceType, ActivatorTypes activatorType, bool showModels)
+    {
+        device = deviceType;
+        activator = activatorType;
+        this.showModels = showModels;
+
+        Reset();
+    }
+
     void Reset()
     {
         DeactivateAllDevices();
+        DragDropObjects.SetActive(true);
 
         positionCounter = 0;
         SetNewPositions();
@@ -141,7 +150,7 @@ public class DeviceManager : MonoBehaviour {
         leap.Disable();
     }
 
-    void SetUserHeight()
+    public void SetUserHeight()
     {
         if (!GameObject.Find("Camera (eye)"))
         {
@@ -160,7 +169,7 @@ public class DeviceManager : MonoBehaviour {
         GameObject.Find("DragDrop Objects").transform.position = current;
     }
 
-    void StartKinectInit()
+    public void StartKinectInit()
     {
         DeactivateAllDevices();
         kinectInit.gameObject.SetActive(true);
