@@ -21,7 +21,7 @@ public class SpeechManager : MonoBehaviour
 	public float requiredConfidence = 0f;
 	
 	[Tooltip("GUI-Text to display the speech-manager debug messages.")]
-	public GUIText debugText;
+	public UnityEngine.UI.Text debugText;
 
 	// Is currently listening
 	private bool isListening;
@@ -150,7 +150,7 @@ public class SpeechManager : MonoBehaviour
 			
 			if(debugText != null)
 			{
-				debugText.GetComponent<GUIText>().text = "Please, wait...";
+				debugText.text = "Please, wait...";
 			}
 			
 			// ensure the needed dlls are in place and speech recognition is available for this interface
@@ -224,20 +224,20 @@ public class SpeechManager : MonoBehaviour
 
 			if(debugText != null)
 			{
-				debugText.GetComponent<GUIText>().text = "Ready.";
+				debugText.text = "Ready.";
 			}
 		} 
 		catch(DllNotFoundException ex)
 		{
 			Debug.LogError(ex.ToString());
 			if(debugText != null)
-				debugText.GetComponent<GUIText>().text = "Please check the Kinect and SAPI installations.";
+				debugText.text = "Please check the Kinect and SAPI installations.";
 		}
 		catch (Exception ex) 
 		{
 			Debug.LogError(ex.ToString());
 			if(debugText != null)
-				debugText.GetComponent<GUIText>().text = ex.Message;
+				debugText.text = ex.Message;
 		}
 	}
 
@@ -307,11 +307,11 @@ public class SpeechManager : MonoBehaviour
 			{
 				if(isPhraseRecognized)
 				{
-					debugText.GetComponent<GUIText>().text = string.Format("{0}  ({1:F1}%)", phraseTagRecognized, phraseConfidence * 100f);
+					debugText.text = string.Format("{0}  ({1:F1}%)", phraseTagRecognized, phraseConfidence * 100f);
 				}
 				else if(isListening)
 				{
-					debugText.GetComponent<GUIText>().text = "Listening...";
+					debugText.text = "Listening...";
 				}
 			}
 		}

@@ -21,7 +21,7 @@ namespace Leap.Unity {
     private static Color[] _rightColorList = { new Color(1.0f, 0.0f, 0.0f), new Color(1.0f, 1.0f, 0.0f), new Color(1.0f, 0.5f, 0.0f) };
 
     [SerializeField]
-    private bool _showArm = true;
+    public bool _showArm = true;
 
     [SerializeField]
     private Material _material;
@@ -101,16 +101,17 @@ namespace Leap.Unity {
     }
 
     public override void UpdateHand() {
-      //Update the spheres first
-      updateSpheres();
+        if (!_showArm)
+            updateArmVisibility();
+      
+        //Update the spheres first
+        updateSpheres();
 
-      //Update Arm only if we need to
-      if (_showArm) {
+        //Update Arm only if we need to
         updateArm();
-      }
 
-      //The capsule transforms are deterimined by the spheres they are connected to
-      updateCapsules();
+        //The capsule transforms are deterimined by the spheres they are connected to
+        updateCapsules();
     }
 
     //Transform updating methods
@@ -187,9 +188,15 @@ namespace Leap.Unity {
       }
     }
 
-    private void updateArmVisibility() {
+    public void updateArmVisibility() {
+      if(!(_armRenderers is List<Renderer>))
+      {
+        return;
+      }
+
       for (int i = 0; i < _armRenderers.Count; i++) {
-        _armRenderers[i].enabled = _showArm;
+        if(_armRenderers[i])
+            _armRenderers[i].enabled = _showArm;
       }
     }
 
@@ -257,7 +264,7 @@ namespace Leap.Unity {
       return fingerIndex * 4 + jointIndex;
     }
 
-    private Transform createSphere(string name, float radius, bool isPartOfArm = false) {
+    private Transform createSphere(string name, float radius, bool isPartOfArm = true) {
       GameObject sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
       DestroyImmediate(sphere.GetComponent<Collider>());
       sphere.transform.parent = transform;
@@ -275,7 +282,7 @@ namespace Leap.Unity {
       return sphere.transform;
     }
 
-    private void createCapsule(string name, Transform jointA, Transform jointB, bool isPartOfArm = false) {
+    private void createCapsule(string name, Transform jointA, Transform jointB, bool isPartOfArm = true) {
       GameObject capsule = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
       DestroyImmediate(capsule.GetComponent<Collider>());
       capsule.name = name;

@@ -2,30 +2,25 @@
 using System.Collections;
 
 public class TouchActivator : DragDropActivator {
-    bool triggerSinceLastFrame;
 
-	// Update is called once per frame
-	void Update () {
-        if(triggerSinceLastFrame)
+    // Update is called once per frame
+    public override void FixedUpdate () {
+        base.FixedUpdate();
+
+        if (!isActive && isHovering)
         {
-            triggerSinceLastFrame = false;
+            isActive = true;
             changedSinceLastFrame = true;
-        } else {
-            changedSinceLastFrame = false;
+            return;
         }
-    }
 
-    //Called from initiator
-    public void Enter()
-    {
-        isActive = true;
-        triggerSinceLastFrame = true;
-    }
-    
-    //Called from initiator
-    public void Exit()
-    {
-        isActive = false;
-        triggerSinceLastFrame = true;
+        if (isActive && !isHovering)
+        {
+            isActive = false;
+            changedSinceLastFrame = true;
+            return;
+        }
+
+        changedSinceLastFrame = false;
     }
 }

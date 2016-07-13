@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class KinectDeviceManager : DeviceManager {
+public class KinectDeviceManager : BaseDeviceManager {
 
     public DragDropActivator KinectPinch_L;
     public DragDropActivator KinectPinch_R;

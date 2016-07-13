@@ -1,0 +1,167 @@
+fileFormatVersion: 2
+guid: 743e9632c4cdb5f4e9db272077078cb3
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: 2pilla_down
+    100002: 2pilla_med_1
+    100004: 2pilla_med_2
+    100006: 2pilla_med_3
+    100008: 2pilla_med_4
+    100010: 2pilla_med_top
+    100012: 2pillar_top
+    100014: floor
+    100016: pil_part1
+    100018: pilar_broken
+    100020: pill_down
+    100022: pill_down2
+    100024: pill_part
+    100026: pill_part2
+    100028: pill_top
+    100030: //RootNode
+    100032: st1
+    100034: st2
+    100036: st3
+    100038: st4
+    400000: 2pilla_down
+    400002: 2pilla_med_1
+    400004: 2pilla_med_2
+    400006: 2pilla_med_3
+    400008: 2pilla_med_4
+    400010: 2pilla_med_top
+    400012: 2pillar_top
+    400014: floor
+    400016: pil_part1
+    400018: pilar_broken
+    400020: pill_down
+    400022: pill_down2
+    400024: pill_part
+    400026: pill_part2
+    400028: pill_top
+    400030: //RootNode
+    400032: st1
+    400034: st2
+    400036: st3
+    400038: st4
+    2300000: 2pilla_down
+    2300002: 2pilla_med_1
+    2300004: 2pilla_med_2
+    2300006: 2pilla_med_3
+    2300008: 2pilla_med_4
+    2300010: 2pilla_med_top
+    2300012: 2pillar_top
+    2300014: floor
+    2300016: pil_part1
+    2300018: pilar_broken
+    2300020: pill_down
+    2300022: pill_down2
+    2300024: pill_part
+    2300026: pill_part2
+    2300028: pill_top
+    2300030: st1
+    2300032: st2
+    2300034: st3
+    2300036: st4
+    3300000: 2pilla_down
+    3300002: 2pilla_med_1
+    3300004: 2pilla_med_2
+    3300006: 2pilla_med_3
+    3300008: 2pilla_med_4
+    3300010: 2pilla_med_top
+    3300012: 2pillar_top
+    3300014: floor
+    3300016: pil_part1
+    3300018: pilar_broken
+    3300020: pill_down
+    3300022: pill_down2
+    3300024: pill_part
+    3300026: pill_part2
+    3300028: pill_top
+    3300030: st1
+    3300032: st2
+    3300034: st3
+    3300036: st4
+    4300000: 2pillar_top
+    4300002: 2pilla_med_top
+    4300004: 2pilla_med_2
+    4300006: 2pilla_med_1
+    4300008: 2pilla_med_3
+    4300010: 2pilla_med_4
+    4300012: 2pilla_down
+    4300014: pil_part1
+    4300016: pilar_broken
+    4300018: pill_down2
+    4300020: pill_down
+    4300022: pill_part
+    4300024: pill_part2
+    4300026: pill_top
+    4300028: st1
+    4300030: st2
+    4300032: st3
+    4300034: st4
+    4300036: floor
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 0.01
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

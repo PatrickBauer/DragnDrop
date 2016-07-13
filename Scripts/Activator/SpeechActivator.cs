@@ -10,7 +10,9 @@ public class SpeechActivator : DragDropActivator {
 	}
 	
 	// Update is called once per frame
-	void FixedUpdate() {
+	override public void FixedUpdate() {
+        base.FixedUpdate();
+
         // get the speech manager instance
         if (speechManager == null)
         {

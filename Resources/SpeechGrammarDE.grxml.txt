@@ -4,19 +4,13 @@
       <item>
         <tag>START</tag>
         <one-of>
-          <item> start </item>
-          <item> los </item>
-          <item> beginn </item>
-          <item> drag </item>
+          <item>los</item>
         </one-of>
       </item>
       <item>
         <tag>ENDE</tag>
         <one-of>
-          <item> ende </item>
-          <item> stop </item>
-          <item> beenden </item>
-          <item> drop </item>
+          <item>ende</item>
         </one-of>
       </item>
     </one-of>

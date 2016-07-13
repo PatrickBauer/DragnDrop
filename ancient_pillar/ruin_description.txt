@@ -1,0 +1,30 @@
+Modular ruin pillars
+
+Ideal for any games. Low poly-high quality.
+You can build your own old forgotten ruin pillar place.
+Ideal for outdor and dungens to.
+Inclued tiled floor textures!!!!
+
+
+
+Textures 1024x1024png
+-diffuse
+-normal
+
+Models
+
+all poly:6000
+    verts:3057
+
+Pillar pack1:poly:4460
+             verts:2260
+
+Pillar pack2:poly:1362
+             verts:697
+
+floor stones:poly:176
+             verts:96
+
+Have fun!!
+
+brudva@gmail.com

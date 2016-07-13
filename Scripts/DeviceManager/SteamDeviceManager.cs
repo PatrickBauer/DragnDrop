@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class SteamDeviceManager : DeviceManager
+public class SteamDeviceManager : BaseDeviceManager
 {
     public GameObject leftController;
     public GameObject rightController;
@@ -16,7 +16,9 @@ public class SteamDeviceManager : DeviceManager
 
     override public void ShowModels(bool showModels)
     {
-        if(showModels)
+        //Debug.Log("Showmodels: " + showModels + " für " + this.gameObject);
+
+        if (showModels)
         {
             leftController.transform.Find("Model").gameObject.SetActive(true);
             rightController.transform.Find("Model").gameObject.SetActive(true);

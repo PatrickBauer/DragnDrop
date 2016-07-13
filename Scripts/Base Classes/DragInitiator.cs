@@ -36,64 +36,31 @@ public class DragInitiator : MonoBehaviour {
 	void FixedUpdate() {
         if (!dragDropActivator) return;
 
-        if (dragDropActivator.isActive && dragDropActivator.changedSinceLastFrame)
+        if(!dragDropActivator.Initiator)
         {
-            // Find the closest item to the hand in case there are multiple and interact with it
-            float minDistance = float.MaxValue;
+            dragDropActivator.Initiator = this;
+        }
 
-            float distance;
-            foreach (DragObject item in objectsHoveringOver)
-            {
-                distance = (item.transform.position - transform.position).sqrMagnitude;
+        interactingItem = dragDropActivator.DragObject.GetComponent<DragObject>();
+        if (!interactingItem) return;
 
-                if (distance < minDistance)
-                {
-                    minDistance = distance;
-                    closestItem = item;
-                }
-            }
+        //set colours of activatr
+        if (dragDropActivator.isHovering)
+        {
+            GetComponent<Renderer>().material.SetColor("_Color", Color.green);
+        }
+        else
+        {
+            GetComponent<Renderer>().material.SetColor("_Color", Color.red);
+        }
 
-            interactingItem = closestItem;
-            closestItem = null;
+        if (dragDropActivator.isActive && dragDropActivator.changedSinceLastFrame && dragDropActivator.isHovering)
+        {
+            interactingItem.OnDragStart(this);
+        }
 
-            if (interactingItem)
-                interactingItem.OnDragStart(this);
-
-        } else if(interactingItem != null && !dragDropActivator.isActive && dragDropActivator.changedSinceLastFrame) {
+        if (!dragDropActivator.isActive && dragDropActivator.changedSinceLastFrame) {
             interactingItem.OnDragStop(this);
-        }
-    }
-
-
-    // Adds all colliding items to a HashSet for processing which is closest
-    private void OnTriggerEnter(Collider collider)
-    {
-        DragObject collidedItem = collider.GetComponent<DragObject>();
-        if (collidedItem)
-        {
-            objectsHoveringOver.Add(collidedItem);
-            collidedItem.OnHoverEnter();
-
-            if(dragDropActivator is TouchActivator)
-            {
-                ((TouchActivator) dragDropActivator).Enter();
-            }
-        }
-    }
-
-    // Remove all items no longer colliding with to avoid further processing
-    private void OnTriggerExit(Collider collider)
-    {
-        DragObject collidedItem = collider.GetComponent<DragObject>();
-        if (collidedItem)
-        {
-            objectsHoveringOver.Remove(collidedItem);
-            collidedItem.OnHoverLeave();
-
-            if (dragDropActivator is TouchActivator)
-            {
-                ((TouchActivator)dragDropActivator).Exit();
-            }
         }
     }
 }
