@@ -15,7 +15,7 @@ public class DragDropActivator : MonoBehaviour {
 
     public DragInitiator Initiator;
 
-    void Start () {
+    public virtual void Start () {
         isActive = false;
         isHovering = false;
 

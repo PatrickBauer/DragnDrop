@@ -2,10 +2,11 @@
 using System.Collections;
 
 public class SpeechActivator : DragDropActivator {
-    private SpeechManager speechManager;
+    public SpeechManager speechManager;
 
     // Use this for initialization
-    void Start () {
+    override public void Start () {
+        base.Start();
         Debug.Log("Speech Activator startet");
 	}
 	
@@ -23,7 +24,7 @@ public class SpeechActivator : DragDropActivator {
         {
             Debug.Log("Speech Manager nicht initialisiert");
         }
-
+        
         if (speechManager != null && speechManager.IsSapiInitialized())
         {
             if (speechManager.IsPhraseRecognized())
@@ -54,4 +55,5 @@ public class SpeechActivator : DragDropActivator {
             changedSinceLastFrame = false;
         }
     }
+    
 }

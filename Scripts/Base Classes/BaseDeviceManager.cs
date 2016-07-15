@@ -40,13 +40,16 @@ public class BaseDeviceManager : MonoBehaviour {
 
     public virtual void AddSpeech()
     {
-        DragDropActivator speech = GameObject.Find("Scripts/Speech").GetComponent<DragDropActivator>();
+        //DragDropActivator speech = GameObject.Find("Scripts/Speech").GetComponent<DragDropActivator>();
 
-        if (left.GetComponent<DragInitiator>() && speech)
-            left.GetComponent<DragInitiator>().externalActivator = speech;
+        //if (left.GetComponent<DragInitiator>() && speech)
+        //    left.GetComponent<DragInitiator>().externalActivator = speech;
 
-        if(right.GetComponent<DragInitiator>() && speech)
-            right.GetComponent<DragInitiator>().externalActivator = speech;
+        //if(right.GetComponent<DragInitiator>() && speech)
+        //    right.GetComponent<DragInitiator>().externalActivator = speech;
+
+        left.AddComponent<SpeechActivator>();
+        right.AddComponent<SpeechActivator>();
     }
 
     public virtual void AddTouch() {

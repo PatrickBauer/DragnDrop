@@ -14,7 +14,9 @@ public class KinectPinchActivator : DragDropActivator
 
 
     // Use this for initialization
-    void Start () {
+    override public void Start () {
+        base.Start();
+
         kinectText = GameObject.Find("KinectText").GetComponent<UnityEngine.UI.Text>();
         lookTarget = GameObject.Find("Camera (eye)").transform;
     }

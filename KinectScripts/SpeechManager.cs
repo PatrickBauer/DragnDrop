@@ -39,7 +39,8 @@ public class SpeechManager : MonoBehaviour
 	
 	// The single instance of SpeechManager
 	private static SpeechManager instance;
-	
+
+    private bool clearLate = false;
 	
 	/// <summary>
 	/// Gets the single SpeechManager instance.
@@ -123,11 +124,21 @@ public class SpeechManager : MonoBehaviour
 	/// </summary>
 	public void ClearPhraseRecognized()
 	{
-		isPhraseRecognized = false;
-		phraseTagRecognized = String.Empty;
-		phraseConfidence = 0f;
+        clearLate = true;
 	}
 
+
+    public void LateUpdate()
+    {
+        if(clearLate)
+        {
+            isPhraseRecognized = false;
+            phraseTagRecognized = String.Empty;
+            phraseConfidence = 0f;
+
+            clearLate = false;
+        }
+    }
 
 	//----------------------------------- end of public functions --------------------------------------//
 

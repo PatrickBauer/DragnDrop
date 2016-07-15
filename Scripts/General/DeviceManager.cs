@@ -67,11 +67,11 @@ public class DeviceManager : MonoBehaviour {
         positionsEnd.Add(new Vector3(-0.3f, 0.1f, 0.2f));
 
         //6
-        positionsStart.Add(new Vector3(0.3f, 0.1f, 02f));
+        positionsStart.Add(new Vector3(0.3f, 0.1f, 0.2f));
         positionsEnd.Add(new Vector3(-0.3f, -0.1f, 0.0f));
     }
 
-    void SetNewPositions()
+    public void SetNewPositions()
     {
         dragObject.transform.localPosition = positionsStart[positionCounter];
         dragStart.transform.localPosition = positionsStart[positionCounter];

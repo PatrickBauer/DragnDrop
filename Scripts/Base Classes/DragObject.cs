@@ -15,6 +15,9 @@ public class DragObject : MonoBehaviour
 
     public float maxDistanceFromLine = 0.05f;
 
+    public bool isDragged = false;
+    public bool changedSinceLasteFrame = false;
+
     // Use this for initialization
     protected void OnEnable()
     {
@@ -27,6 +30,11 @@ public class DragObject : MonoBehaviour
     public void Reset()
     {
         transform.position = initialPosition;
+    }
+
+    public void LateUpdate()
+    {
+        changedSinceLasteFrame = false;
     }
 
     protected void FixedUpdate()
@@ -74,6 +82,9 @@ public class DragObject : MonoBehaviour
         }
 
         transform.SetParent(interactionPoint, true);
+
+        isDragged = true;
+        changedSinceLasteFrame = true;
     }
 
     public void OnDragStop(DragInitiator initiator)
@@ -83,6 +94,9 @@ public class DragObject : MonoBehaviour
             dragInitiator = null;
             transform.SetParent(original, true);
         }
+
+        isDragged = false;
+        changedSinceLasteFrame = true;
     }
     
     private void OnDestroy()

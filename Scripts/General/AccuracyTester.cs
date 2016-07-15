@@ -10,7 +10,10 @@ public class AccuracyTester : MonoBehaviour {
     public float accuracy = 0.0f;
     protected float factor = 100000;
     protected Vector3 difference;
-    
+
+    public bool isInsideTarget = false;
+
+
     void Update () {
         difference = transform.position - target.transform.position;
 
@@ -29,10 +32,15 @@ public class AccuracyTester : MonoBehaviour {
 
             if (accuracy >= minAccuracy)
             {
+                isInsideTarget = true;
                 GetComponent<Renderer>().material.SetColor("_Color", Color.green);
             } else {
+                isInsideTarget = false;
                 GetComponent<Renderer>().material.SetColor("_Color", Color.blue);
             }
+        } else
+        {
+            isInsideTarget = false;
         }
     }
 
