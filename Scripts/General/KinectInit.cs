@@ -7,10 +7,10 @@ public class KinectInit : MonoBehaviour
     private Valve.VR.EVRButtonId triggerButton = Valve.VR.EVRButtonId.k_EButton_SteamVR_Trigger;
 
     private SteamVR_Controller.Device controller { get {
-            if ((int)firstControllerTracked.index <= 0 || (int)firstControllerTracked.index >= 10)
+            if ((int)secondControllerTracked.index <= 0 || (int)secondControllerTracked.index >= 10)
                 return null;
 
-            return SteamVR_Controller.Input((int)firstControllerTracked.index);
+            return SteamVR_Controller.Input((int)secondControllerTracked.index);
         } }
 
     public SteamVR_TrackedObject firstControllerTracked;

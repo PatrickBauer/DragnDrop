@@ -19,18 +19,14 @@ public class DragDropActivator : MonoBehaviour {
         isActive = false;
         isHovering = false;
 
-        DragObject = GameObject.Find("DragObject");
-
-        if(GameObject.Find("Text"))
-            text = GameObject.Find("Text").GetComponent<UnityEngine.UI.Text>();
+        if(!DragObject)
+            DragObject = GameObject.Find("DragObject");
     }
 
     void OnEnable()
     {
-        DragObject = GameObject.Find("DragObject");
-
-        if (GameObject.Find("Text"))
-            text = GameObject.Find("Text").GetComponent<UnityEngine.UI.Text>();
+        if(!DragObject)
+            DragObject = GameObject.Find("DragObject");
     }
 
     public virtual void FixedUpdate () {
@@ -40,11 +36,7 @@ public class DragDropActivator : MonoBehaviour {
         }
 
         float distance = Vector3.Distance(Initiator.transform.position, DragObject.transform.position);
-
-        //set distance string
-        if(text)
-            text.text = distance.ToString();
-
+        
         //active/deactivate hover state
         if (!isHovering && distance <= hoverStartDistance)
         {

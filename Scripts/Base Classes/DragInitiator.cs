@@ -42,9 +42,10 @@ public class DragInitiator : MonoBehaviour {
         }
 
         interactingItem = dragDropActivator.DragObject.GetComponent<DragObject>();
+
         if (!interactingItem) return;
 
-        //set colours of activatr
+        //set colours of initator
         if (dragDropActivator.isHovering)
         {
             GetComponent<Renderer>().material.SetColor("_Color", Color.green);
