@@ -54,7 +54,7 @@ public class KinectInit : MonoBehaviour
         Vector3 middle = Vector3.Lerp(firstControllerTracked.transform.position, secondControllerTracked.transform.position, 0.5f);
         indicator.transform.position = middle;
 
-        if (controller.GetPressDown(triggerButton))
+        if (controller.GetPressDown(triggerButton) || Input.GetKeyDown(KeyCode.K))
         {
             cubeman.ResetAt(middle);
         }

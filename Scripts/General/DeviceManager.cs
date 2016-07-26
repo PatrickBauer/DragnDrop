@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.IO;
 
 public class DeviceManager : MonoBehaviour {
     public BaseDeviceManager kinect;
@@ -41,34 +43,64 @@ public class DeviceManager : MonoBehaviour {
     public RenderLine line;
     public GameObject DragDropObjects;
 
+    public TestManager testManager;
+    public bool training = true;
+
     private int positionCounter = 0;
 
     // Use this for initialization
     void Start()
     {
-        //1
+        //1 = links -> rechts
         positionsStart.Add(new Vector3(-0.3f, 0.0f, 0.0f));
         positionsEnd.Add(new Vector3(0.3f, 0.0f, 0.0f));
 
-        //2
-        positionsStart.Add(new Vector3(-0.3f, -0.1f, 0.0f));
-        positionsEnd.Add(new Vector3(0.3f, 0.1f, 0.2f));
-        
-        //3
-        positionsStart.Add(new Vector3(-0.3f, 0.1f, 0.2f));
-        positionsEnd.Add(new Vector3(0.3f, -0.1f, 0.0f));
-
-        //4
+        //2 = rechts -> links
         positionsStart.Add(new Vector3(0.3f, 0.0f, 0.0f));
         positionsEnd.Add(new Vector3(-0.3f, 0.0f, 0.0f));
 
-        //5
-        positionsStart.Add(new Vector3(0.3f, -0.1f, 0.0f));
-        positionsEnd.Add(new Vector3(-0.3f, 0.1f, 0.2f));
+        //----------------------
 
-        //6
-        positionsStart.Add(new Vector3(0.3f, 0.1f, 0.2f));
-        positionsEnd.Add(new Vector3(-0.3f, -0.1f, 0.0f));
+
+        //3 = obenlinks -> untenrechts
+        positionsStart.Add(new Vector3(-0.26f, 0.15f, 0.0f));
+        positionsEnd.Add(new Vector3(0.26f, -0.15f, 0.0f));
+
+        //4 = untenlinks -> obenrechts
+        positionsStart.Add(new Vector3(-0.26f, -0.15f, 0.0f));
+        positionsEnd.Add(new Vector3(0.26f, 0.15f, 0.0f));
+
+        //5 = untenrechts -> obenlinks
+        positionsStart.Add(new Vector3(0.26f, -0.15f, 0.0f));
+        positionsEnd.Add(new Vector3(-0.26f, 0.15f, 0.0f));
+
+        //6 = obenrechts -> untenlinks
+        positionsStart.Add(new Vector3(0.26f, 0.15f, 0.0f));
+        positionsEnd.Add(new Vector3(-0.26f, -0.15f, 0.0f));
+
+        //----------------------
+
+        //7 = vornelinks - hintenrechts
+        positionsStart.Add(new Vector3(-0.26f, 0.0f, 0.0f));
+        positionsEnd.Add(new Vector3(0.26f, 0.0f, 0.3f));
+
+        //8 = hintenlinks -> vornerechts
+        positionsStart.Add(new Vector3(-0.26f, 0.0f, 0.3f));
+        positionsEnd.Add(new Vector3(0.26f, 0.0f, 0.0f));
+        
+        //9 = hintenrechts -> vornelinks
+        positionsStart.Add(new Vector3(0.26f, 0.0f, 0.3f));
+        positionsEnd.Add(new Vector3(-0.26f, 0.0f, 0.0f));
+
+        //10 = vornerechts -> hintenlinks
+        positionsStart.Add(new Vector3(0.26f, 0.0f, 0.0f));
+        positionsEnd.Add(new Vector3(-0.26f, 0.0f, 0.3f));
+
+    }
+
+    public void Hide()
+    {
+        DragDropObjects.SetActive(false);
     }
 
     public void SetNewPositions()
@@ -76,11 +108,15 @@ public class DeviceManager : MonoBehaviour {
         dragObject.transform.localPosition = positionsStart[positionCounter];
         dragStart.transform.localPosition = positionsStart[positionCounter];
         control.transform.localPosition = positionsStart[positionCounter];
+
         dropTarget.transform.localPosition = positionsEnd[positionCounter];
         line.Reset();
 
+        //Debug.Log("Distance: " + Vector3.Distance(dragObject.transform.localPosition, dropTarget.transform.localPosition));
+
         positionCounter = positionCounter + 1;
-        if (positionCounter > positionsStart.Count - 1)
+
+        if (positionCounter == positionsStart.Count)
             positionCounter = 0;
     }
 
@@ -93,7 +129,7 @@ public class DeviceManager : MonoBehaviour {
         Reset();
     }
 
-    void Reset()
+    public void Reset()
     {
         DeactivateAllDevices();
         DragDropObjects.SetActive(true);
@@ -141,7 +177,7 @@ public class DeviceManager : MonoBehaviour {
         activeDevice.ShowModels(showModels);
     }
 
-    void DeactivateAllDevices()
+    public void DeactivateAllDevices()
     {
         kinectInit.gameObject.SetActive(false);
 
@@ -158,15 +194,9 @@ public class DeviceManager : MonoBehaviour {
             return;
         }
 
-        if (!GameObject.Find("DragDrop Objects"))
-        {
-            Debug.Log("DragDropObjects not found");
-            return;
-        }
-
-        Vector3 current = GameObject.Find("DragDrop Objects").transform.position;
+        Vector3 current = DragDropObjects.transform.position;
         current.y = GameObject.Find("Camera (eye)").transform.position.y - 0.3f;
-        GameObject.Find("DragDrop Objects").transform.position = current;
+        DragDropObjects.transform.position = current;
     }
 
     public void StartKinectInit()
@@ -207,6 +237,24 @@ public class DeviceManager : MonoBehaviour {
         if (GUILayout.Button("Set User Height"))
         {
             SetUserHeight();
+        }
+
+        GUILayout.Space(20.0f);
+        GUILayout.Label(testManager.currentMessage);
+
+        if (GUILayout.Button("Next"))
+        {
+            testManager.NextAction();
+        }
+
+        if (GUILayout.Button("Write Test File"))
+        {
+            string path = Application.persistentDataPath;
+
+            BinaryFormatter bf = new BinaryFormatter();
+            FileStream file = File.Create(path + "/testfile.dd");
+            bf.Serialize(file, new UserData());
+            file.Close();
         }
     }
 

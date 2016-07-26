@@ -7,8 +7,6 @@ public class DragInitiator : MonoBehaviour {
     public DragDropActivator externalActivator;
     public DragDropActivator dragDropActivator { get;set; }
 
-    HashSet<DragObject> objectsHoveringOver = new HashSet<DragObject>();
-
     private DragObject closestItem;
     private DragObject interactingItem;
 
@@ -33,7 +31,7 @@ public class DragInitiator : MonoBehaviour {
     }
 
 	// Update is called once per frame
-	void FixedUpdate() {
+	void Update() {
         if (!dragDropActivator) return;
 
         if(!dragDropActivator.Initiator)

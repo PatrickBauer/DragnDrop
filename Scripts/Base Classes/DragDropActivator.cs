@@ -29,7 +29,7 @@ public class DragDropActivator : MonoBehaviour {
             DragObject = GameObject.Find("DragObject");
     }
 
-    public virtual void FixedUpdate () {
+    public virtual void Update () {
         if(!Initiator)
         {
             return;

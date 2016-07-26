@@ -37,7 +37,7 @@ public class DragObject : MonoBehaviour
         changedSinceLasteFrame = false;
     }
 
-    protected void FixedUpdate()
+    protected void Update()
     {
         if (dragInitiator)
         {

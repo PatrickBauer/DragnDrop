@@ -17,20 +17,26 @@ public class KinectPinchActivator : DragDropActivator
     override public void Start () {
         base.Start();
 
-        kinectText = GameObject.Find("KinectText").GetComponent<UnityEngine.UI.Text>();
-        lookTarget = GameObject.Find("Camera (eye)").transform;
+        if (GameObject.Find("KinectText"))
+            kinectText = GameObject.Find("KinectText").GetComponent<UnityEngine.UI.Text>();
+
+        if(GameObject.Find("Camera (eye)"))
+            lookTarget = GameObject.Find("Camera (eye)").transform;
     }
 
     // Update is called once per frame
-    override public void FixedUpdate () {
-        base.FixedUpdate();
+    override public void Update () {
+        base.Update();
 
         float distance = Vector3.Distance(A.transform.position, B.transform.position);
 
         //draw text
-        kinectText.text = distance.ToString();
-        kinectText.transform.LookAt(lookTarget);
-        kinectText.transform.Rotate(new Vector3(0.0f, 180.0f, 0.0f));
+        if(kinectText)
+        {
+            kinectText.text = distance.ToString();
+            kinectText.transform.LookAt(lookTarget);
+            kinectText.transform.Rotate(new Vector3(0.0f, 180.0f, 0.0f));
+        }
 
 
         if (!isActive && distance <= startDistance)

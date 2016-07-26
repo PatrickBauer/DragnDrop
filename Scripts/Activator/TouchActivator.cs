@@ -4,8 +4,8 @@ using System.Collections;
 public class TouchActivator : DragDropActivator {
 
     // Update is called once per frame
-    public override void FixedUpdate () {
-        base.FixedUpdate();
+    public override void Update () {
+        base.Update();
 
         if (!isActive && isHovering)
         {

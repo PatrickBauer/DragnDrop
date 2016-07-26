@@ -106,6 +106,8 @@ public class CubemanController : MonoBehaviour
         offsetPosition = position - posPointMan;
         offsetPosition.z = -offsetPosition.z;
         offsetPosition.y = 0.0f;
+
+        yposition = 0.0f;
     }
 
     void Update () 
@@ -123,6 +125,8 @@ public class CubemanController : MonoBehaviour
 		        
         Vector3 Relpos = posPointMan;
         Relpos.z = -Relpos.z;
+
+        offsetPosition.y = yposition;
 
         transform.position = (Relpos * moveRate) + offsetPosition;
         //Debug.Log("Von Kinect: " + Relpos + " - Offset: " + offsetPosition + " =  Endposition: " + transform.position + " = Indikator: " + indicator.transform.position);

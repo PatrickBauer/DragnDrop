@@ -6,7 +6,9 @@ public class LeapMotionPinchActivator : DragDropActivator {
     public Leap.Unity.PinchUtility.LeapPinchDetector pinchDetector;
     
 	// Update is called once per frame
-	void Update () {
+	public override void Update () {
+        base.Update();
+
         if (pinchDetector.DidStartPinch)
         {
             isActive = true;
