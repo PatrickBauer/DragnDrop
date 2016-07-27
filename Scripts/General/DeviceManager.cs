@@ -104,6 +104,8 @@ public class DeviceManager : MonoBehaviour {
 
     public void SetNewPositions()
     {
+        dragObject.ForceParent();
+
         dragObject.transform.localPosition = positionsStart[positionCounter];
         dragStart.transform.localPosition = positionsStart[positionCounter];
         control.transform.localPosition = positionsStart[positionCounter];
@@ -127,6 +129,8 @@ public class DeviceManager : MonoBehaviour {
         {
             temp = 9;
         }
+
+        dragObject.ForceParent();
 
         dragObject.transform.localPosition = positionsStart[temp];
         dragStart.transform.localPosition = positionsStart[temp];
@@ -282,6 +286,11 @@ public class DeviceManager : MonoBehaviour {
             FileStream file = File.Create(path + "/testfile.dd");
             bf.Serialize(file, new UserData());
             file.Close();
+        }
+
+        if (GUILayout.Button("Force Parent"))
+        {
+            dragObject.ForceParent();
         }
     }
 

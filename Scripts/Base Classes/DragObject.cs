@@ -6,7 +6,7 @@ public class DragObject : MonoBehaviour
 {
     public DragInitiator dragInitiator;
     private Transform interactionPoint;
-    private Transform original;
+    public Transform original;
     public GameObject control;
 
     public bool allowRotation = false;
@@ -25,7 +25,7 @@ public class DragObject : MonoBehaviour
         interactionPoint = new GameObject("Interaction Point").transform;
         initialPosition = transform.position;
 
-        original = transform.parent;
+        //original = transform.parent;
     }
 
     public void Reset()
@@ -110,6 +110,11 @@ public class DragObject : MonoBehaviour
         changedSinceLasteFrame = true;
     }
     
+    public void ForceParent()
+    {
+        transform.SetParent(original, true);
+    }
+
     private void OnDestroy()
     {
         if (interactionPoint) Destroy(interactionPoint.gameObject);

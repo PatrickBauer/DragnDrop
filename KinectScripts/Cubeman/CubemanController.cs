@@ -107,7 +107,7 @@ public class CubemanController : MonoBehaviour
         offsetPosition.z = -offsetPosition.z;
         offsetPosition.y = 0.0f;
 
-        yposition = 0.0f;
+        //yposition = 0.0f;
     }
 
     void Update () 

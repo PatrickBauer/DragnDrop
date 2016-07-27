@@ -60,8 +60,8 @@ public class TestManager : MonoBehaviour {
         //shuffled Actions
         shuffleActions = new List<System.Action>();
 
-        //shuffleActions.Add(Kinect);
-        //shuffleActions.Add(Leap);
+        shuffleActions.Add(Kinect);
+        shuffleActions.Add(Leap);
         shuffleActions.Add(Steam);
 
         var shuffledActions = shuffleActions.OrderBy(a => System.Guid.NewGuid());
@@ -289,7 +289,7 @@ public class TestManager : MonoBehaviour {
                 tracking.activator = deviceManager.activator;
                 tracking.speed = speed;
                 tracking.startEndPositionIndex = deviceManager.positionCounter;
-                tracking.initiator = deviceManager.dragObject.dragInitiator.transform.name;
+                //tracking.initiator = deviceManager.dragObject.dragInitiator.transform.name;
 
                 Debug.Log(tracking.initiator);
 
