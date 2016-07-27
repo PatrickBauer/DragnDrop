@@ -19,6 +19,8 @@ public class UserData {
         bf.Serialize(file, this);
         file.Close();
 
+        Debug.Log("Datei gespeichert in " + path + "/user_" + username + ".dd");
+
         return true;
     }
 

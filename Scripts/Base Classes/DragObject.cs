@@ -4,7 +4,7 @@ using System.Collections;
 
 public class DragObject : MonoBehaviour
 {
-    private DragInitiator dragInitiator;
+    public DragInitiator dragInitiator;
     private Transform interactionPoint;
     private Transform original;
     public GameObject control;
@@ -17,6 +17,7 @@ public class DragObject : MonoBehaviour
 
     public bool isDragged = false;
     public bool changedSinceLasteFrame = false;
+    bool isHovering = false;
 
     // Use this for initialization
     protected void OnEnable()
@@ -39,6 +40,16 @@ public class DragObject : MonoBehaviour
 
     protected void Update()
     {
+        //set colors
+        if(isHovering && isDragged)
+            GetComponent<Renderer>().material.SetColor("_Color", Color.blue);
+        else if (isHovering)
+            GetComponent<Renderer>().material.SetColor("_Color", new Color(0.263f, 0.686f, 1.0f));
+        else
+            GetComponent<Renderer>().material.SetColor("_Color", Color.white);
+
+
+
         if (dragInitiator)
         {
             interactionPoint.transform.position = dragInitiator.transform.position;
@@ -106,12 +117,12 @@ public class DragObject : MonoBehaviour
 
     public void OnHoverEnter()
     {
-        GetComponent<Renderer>().material.SetColor("_Color", Color.blue);
+        isHovering = true;
     }
 
 
     public void OnHoverLeave()
     {
-        GetComponent<Renderer>().material.SetColor("_Color", Color.white);
+        isHovering = false;
     }
 }

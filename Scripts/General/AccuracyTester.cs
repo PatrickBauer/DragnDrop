@@ -33,14 +33,21 @@ public class AccuracyTester : MonoBehaviour {
             if (accuracy >= minAccuracy)
             {
                 isInsideTarget = true;
-                GetComponent<Renderer>().material.SetColor("_Color", Color.green);
+
+                if (gameObject.transform.name == "Control")
+                    GetComponent<Renderer>().material.SetColor("_Color", new Color(0.0f, 1.0f, 0.0f, 0.4f));
             } else {
                 isInsideTarget = false;
-                GetComponent<Renderer>().material.SetColor("_Color", Color.blue);
+
+                if (gameObject.transform.name == "Control")
+                    GetComponent<Renderer>().material.SetColor("_Color", new Color(1.0f, 1.0f, 1.0f, 0.4f));
             }
         } else
         {
             isInsideTarget = false;
+
+            if (gameObject.transform.name == "Control")
+                GetComponent<Renderer>().material.SetColor("_Color", new Color(1.0f, 1.0f, 1.0f, 0.4f));
         }
     }
 

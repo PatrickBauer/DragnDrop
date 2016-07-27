@@ -43,6 +43,10 @@ public class TestManager : MonoBehaviour {
     public string currentMessage = "Welcome";
     string username;
 
+
+    //speed 0 = genau wie moeglich 1 = schnell wie moeglich
+    public int speed;
+
     public UnityEngine.UI.Text menuText;
 
     // Use this for initialization
@@ -126,41 +130,41 @@ public class TestManager : MonoBehaviour {
 
     void KinectInit()
     {
-        currentMessage = "Kinect Init, Next Sets User Height";
+        currentMessage = "Kinect Init (can press K)";
         deviceManager.StartKinectInit();
     }
 
 
     void KinectStop()
     {
-        currentMessage = "User Height Set, Kinect Init done, Tests will start now:";
+        currentMessage = "User-Height Set";
         deviceManager.DeactivateAllDevices();
         deviceManager.SetUserHeight();
     }
 
     void Kinect()
     {
-        currentMessage = "Kinect - Next zum aktivieren";
+        currentMessage = "Kinect";
         deviceManager.device = DeviceManager.DeviceTypes.Kinect;
 
     }
     
     void Leap()
     {
-        currentMessage = "Leap - Next zum aktivieren";
+        currentMessage = "Leap";
         deviceManager.device = DeviceManager.DeviceTypes.Leap;
 
     }
 
     void Steam()
     {
-        currentMessage = "Steam - Next zum aktivieren";
+        currentMessage = "Steam";
         deviceManager.device = DeviceManager.DeviceTypes.SteamVR;
     }
 
     void pinch()
     {
-        currentMessage = "Pinch aktiviert - Next zum starten";
+        currentMessage = "Pinch";
         deviceManager.activator = DeviceManager.ActivatorTypes.Pinch;
         deviceManager.showModels = true;
 
@@ -170,7 +174,7 @@ public class TestManager : MonoBehaviour {
 
     void touchmit()
     {
-        currentMessage = "Touch mit Models aktiviert - Next zum starten";
+        currentMessage = "Touch mit Models";
         deviceManager.activator = DeviceManager.ActivatorTypes.Touch;
         deviceManager.showModels = true;
 
@@ -180,7 +184,7 @@ public class TestManager : MonoBehaviour {
 
     void touchohne()
     {
-        currentMessage = "Touch ohne Models aktiviert - Next zum starten";
+        currentMessage = "Touch ohne Models";
         deviceManager.activator = DeviceManager.ActivatorTypes.Touch;
         deviceManager.showModels = false;
 
@@ -191,7 +195,7 @@ public class TestManager : MonoBehaviour {
 
     void uebung()
     {
-        currentMessage = "Uebungsphase - Next sobald User bereit";
+        currentMessage = "Uebung - Next if user is ready";
         deviceManager.training = true;
         isTracking = false;
 
@@ -203,10 +207,11 @@ public class TestManager : MonoBehaviour {
 
     void schnell()
     {
-        currentMessage = "Schnelle Phase (x10) - Erst Next wenn verschwunden";
+        currentMessage = "Fast Phase (x10) - Next if hidden";
         deviceManager.training = false;
         isTracking = true;
 
+        speed = 1;
         currentTrackingsPerVariation = 0;
         dragStarted = false;
 
@@ -215,10 +220,11 @@ public class TestManager : MonoBehaviour {
 
     void genau()
     {
-        currentMessage = "Genaue Phase (x10) - Erst Next wenn verschwunden";
+        currentMessage = "Accurate Phase (x10) - Next if hidden";
         deviceManager.training = false;
         isTracking = true;
 
+        speed = 0;
         currentTrackingsPerVariation = 0;
         dragStarted = false;
 
@@ -276,6 +282,17 @@ public class TestManager : MonoBehaviour {
         {
             if(isTracking)
             {
+                //add data to tracking
+                tracking.startpoint.V3 = deviceManager.dragStart.transform.localPosition;
+                tracking.endpoint.V3 = deviceManager.dropTarget.transform.localPosition;
+                tracking.device = deviceManager.device;
+                tracking.activator = deviceManager.activator;
+                tracking.speed = speed;
+                tracking.startEndPositionIndex = deviceManager.positionCounter;
+                tracking.initiator = deviceManager.dragObject.dragInitiator.transform.name;
+
+                Debug.Log(tracking.initiator);
+
                 userData.addTracking(this.tracking);
                 dragStarted = false;
             }

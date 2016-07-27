@@ -25,10 +25,15 @@ public class TrackInstance {
     //0 = left, 1 = right
     public int hand = 0;
 
+    public string initiator;
+
     // Use this for initialization
     public TrackInstance()
     {
         positions = new List<Vector3Serializer>();
         time = 0.0f;
+
+        startpoint = new Vector3Serializer();
+        endpoint = new Vector3Serializer();
     }
 }

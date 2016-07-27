@@ -9,6 +9,8 @@ public class KinectPinchActivator : DragDropActivator
     public float startDistance = 0.065f;
     public float stopDistance = 0.10f;
 
+    public float currentDistance = 0.0f;
+
     UnityEngine.UI.Text kinectText;
     Transform lookTarget;
 
@@ -29,9 +31,10 @@ public class KinectPinchActivator : DragDropActivator
         base.Update();
 
         float distance = Vector3.Distance(A.transform.position, B.transform.position);
+        currentDistance = distance;
 
         //draw text
-        if(kinectText)
+        if (kinectText)
         {
             kinectText.text = distance.ToString();
             kinectText.transform.LookAt(lookTarget);

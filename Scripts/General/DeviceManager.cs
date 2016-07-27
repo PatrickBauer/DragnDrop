@@ -46,7 +46,7 @@ public class DeviceManager : MonoBehaviour {
     public TestManager testManager;
     public bool training = true;
 
-    private int positionCounter = 0;
+    public int positionCounter = 0;
 
     // Use this for initialization
     void Start()
@@ -81,21 +81,20 @@ public class DeviceManager : MonoBehaviour {
         //----------------------
 
         //7 = vornelinks - hintenrechts
-        positionsStart.Add(new Vector3(-0.26f, 0.0f, 0.0f));
-        positionsEnd.Add(new Vector3(0.26f, 0.0f, 0.3f));
+        positionsStart.Add(new Vector3(-0.26f, 0.0f, -0.15f));
+        positionsEnd.Add(new Vector3(0.26f, 0.0f, 0.15f));
 
         //8 = hintenlinks -> vornerechts
-        positionsStart.Add(new Vector3(-0.26f, 0.0f, 0.3f));
-        positionsEnd.Add(new Vector3(0.26f, 0.0f, 0.0f));
+        positionsStart.Add(new Vector3(-0.26f, 0.0f, 0.15f));
+        positionsEnd.Add(new Vector3(0.26f, 0.0f, -0.15f));
         
         //9 = hintenrechts -> vornelinks
-        positionsStart.Add(new Vector3(0.26f, 0.0f, 0.3f));
-        positionsEnd.Add(new Vector3(-0.26f, 0.0f, 0.0f));
+        positionsStart.Add(new Vector3(0.26f, 0.0f, 0.15f));
+        positionsEnd.Add(new Vector3(-0.26f, 0.0f, -0.15f));
 
         //10 = vornerechts -> hintenlinks
-        positionsStart.Add(new Vector3(0.26f, 0.0f, 0.0f));
-        positionsEnd.Add(new Vector3(-0.26f, 0.0f, 0.3f));
-
+        positionsStart.Add(new Vector3(0.26f, 0.0f, -0.15f));
+        positionsEnd.Add(new Vector3(-0.26f, 0.0f, 0.15f));
     }
 
     public void Hide()
@@ -120,6 +119,22 @@ public class DeviceManager : MonoBehaviour {
             positionCounter = 0;
     }
 
+    public void ResetPositions()
+    {
+        int temp = positionCounter - 1;
+
+        if(positionCounter == 0)
+        {
+            temp = 9;
+        }
+
+        dragObject.transform.localPosition = positionsStart[temp];
+        dragStart.transform.localPosition = positionsStart[temp];
+        control.transform.localPosition = positionsStart[temp];
+        dropTarget.transform.localPosition = positionsEnd[temp];
+        line.Reset();
+    }
+
     public void Reset(DeviceTypes deviceType, ActivatorTypes activatorType, bool showModels)
     {
         device = deviceType;
@@ -129,15 +144,17 @@ public class DeviceManager : MonoBehaviour {
         Reset();
     }
 
-    public void Reset()
+    public void Reset(bool setNewPositions = true)
     {
         DeactivateAllDevices();
         DragDropObjects.SetActive(true);
 
-        positionCounter = 0;
-        SetNewPositions();
-
-        accuracyTeser.accuracy = 0.0f;
+        if(setNewPositions)
+        {
+            positionCounter = 0;
+            SetNewPositions();
+            accuracyTeser.accuracy = 0.0f;
+        }
 
         BaseDeviceManager activeDevice = null;
 
@@ -227,6 +244,11 @@ public class DeviceManager : MonoBehaviour {
             Reset();
         }
 
+        if (GUILayout.Button("Reset without positions"))
+        {
+            Reset(false);
+        }
+
         GUILayout.Space(20.0f);
 
         if (GUILayout.Button("Kinect Initialization"))
@@ -245,6 +267,11 @@ public class DeviceManager : MonoBehaviour {
         if (GUILayout.Button("Next"))
         {
             testManager.NextAction();
+        }
+
+        if (GUILayout.Button("Reset Positions"))
+        {
+            this.ResetPositions();
         }
 
         if (GUILayout.Button("Write Test File"))

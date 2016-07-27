@@ -39,18 +39,21 @@ public class DragInitiator : MonoBehaviour {
             dragDropActivator.Initiator = this;
         }
 
-        interactingItem = dragDropActivator.DragObject.GetComponent<DragObject>();
+        if (dragDropActivator.DragObject)
+            interactingItem = dragDropActivator.DragObject.GetComponent<DragObject>();
+        else
+            interactingItem = null;
 
         if (!interactingItem) return;
 
         //set colours of initator
         if (dragDropActivator.isHovering)
         {
-            GetComponent<Renderer>().material.SetColor("_Color", Color.green);
+            //GetComponent<Renderer>().material.SetColor("_Color", Color.green);
         }
         else
         {
-            GetComponent<Renderer>().material.SetColor("_Color", Color.red);
+            //GetComponent<Renderer>().material.SetColor("_Color", Color.red);
         }
 
         if (dragDropActivator.isActive && dragDropActivator.changedSinceLastFrame && dragDropActivator.isHovering)
