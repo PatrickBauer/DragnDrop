@@ -60,7 +60,7 @@ public class TestManager : MonoBehaviour {
         //shuffled Actions
         shuffleActions = new List<System.Action>();
 
-        shuffleActions.Add(Kinect);
+        //shuffleActions.Add(Kinect);
         shuffleActions.Add(Leap);
         shuffleActions.Add(Steam);
 
@@ -94,6 +94,23 @@ public class TestManager : MonoBehaviour {
             actions.Add(schnell);
             actions.Add(genau);
         }
+
+        //actions.Add(Kinect);
+
+        //actions.Add(pinch);
+        //actions.Add(uebung);
+        //actions.Add(schnell);
+        //actions.Add(genau);
+
+        //actions.Add(touchmit);
+        //actions.Add(uebung);
+        //actions.Add(schnell);
+        //actions.Add(genau);
+
+        //actions.Add(touchohne);
+        //actions.Add(uebung);
+        //actions.Add(schnell);
+        //actions.Add(genau);
 
         //add end actions
         actions.Add(Save);
@@ -289,9 +306,9 @@ public class TestManager : MonoBehaviour {
                 tracking.activator = deviceManager.activator;
                 tracking.speed = speed;
                 tracking.startEndPositionIndex = deviceManager.positionCounter;
-                //tracking.initiator = deviceManager.dragObject.dragInitiator.transform.name;
+                tracking.initiator = deviceManager.dragObject.lastInitiator;
 
-                Debug.Log(tracking.initiator);
+                //Debug.Log(tracking.initiator);
 
                 userData.addTracking(this.tracking);
                 dragStarted = false;

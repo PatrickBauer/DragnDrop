@@ -18,6 +18,7 @@ public class DragObject : MonoBehaviour
     public bool isDragged = false;
     public bool changedSinceLasteFrame = false;
     bool isHovering = false;
+    public string lastInitiator = "";
 
     // Use this for initialization
     protected void OnEnable()
@@ -104,12 +105,24 @@ public class DragObject : MonoBehaviour
         {
             dragInitiator = null;
             transform.SetParent(original, true);
+            lastInitiator = GetGameObjectPath(initiator.gameObject);
         }
 
         isDragged = false;
         changedSinceLasteFrame = true;
     }
-    
+
+    public static string GetGameObjectPath(GameObject obj)
+    {
+        string path = "/" + obj.name;
+        while (obj.transform.parent != null)
+        {
+            obj = obj.transform.parent.gameObject;
+            path = "/" + obj.name + path;
+        }
+        return path;
+    }
+
     public void ForceParent()
     {
         transform.SetParent(original, true);
